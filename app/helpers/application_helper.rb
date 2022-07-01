@@ -8,4 +8,17 @@ module ApplicationHelper
       page_title + " | " + base_title
     end
   end
+
+  # A method that prints the class hierachy of an object and returns the class of the object. (For practise purposes)
+  def print_hierarchy(obj = nil)   
+    clazz = obj.class
+    objClass = clazz.to_s
+    level = 1
+    while clazz != nil do
+      puts "-" * level + clazz.to_s
+      clazz = clazz.superclass
+      level += 1
+    end
+    return objClass
+  end
 end
