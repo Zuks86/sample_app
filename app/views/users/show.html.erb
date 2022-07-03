@@ -1,0 +1,4 @@
+<%= @user.name %>, <%= @user.email %>
+<div>Created at: <%= in_tz(@user.created_at) %></div>
+<div>Updated at: <%= in_tz(@user.updated_at) %></div>
+<div>Time now: <%= in_tz(Time.now) %></div>
