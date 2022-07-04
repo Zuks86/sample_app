@@ -21,4 +21,8 @@ module ApplicationHelper
     end
     return objClass
   end
+
+  def in_tz(date = Time.now, tz = "Africa/Johannesburg")
+    return date.in_time_zone(tz)
+  end
 end
