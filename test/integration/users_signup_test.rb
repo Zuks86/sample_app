@@ -24,4 +24,21 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
       assert_select "li", error
     end
   end
+
+  test "valid signup information" do
+    get signup_path
+    assert_difference 'User.count', 1 do
+      post users_path, params: {
+        user: {
+          name: "Valid User",
+          email: "valid@user.com",
+          password: "foobar",
+          password_confirmation: "foobar"
+        }
+      }
+    end
+    follow_redirect!
+    assert_template 'users/show'
+    assert_not flash.empty?
+  end
 end
