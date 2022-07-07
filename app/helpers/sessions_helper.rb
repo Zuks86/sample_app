@@ -26,6 +26,11 @@ module SessionsHelper
     end
   end
 
+  # Returns true if user is the currently logged in user
+  def current_user?(user)
+    user && user == current_user
+  end
+
   # Returns true if user is logged in, otherwise false
   def logged_in?
     !current_user.nil?
@@ -43,5 +48,10 @@ module SessionsHelper
     forget(current_user)
     reset_session
     @current_user = nil
+  end
+
+  # Stores the URL trying to be accessed.
+  def store_location
+    session[:forwarding_url] = request.original_url if request.get?
   end
 end
