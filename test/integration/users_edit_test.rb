@@ -17,7 +17,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_select 'div#error_explanation'
     assert_select 'div.alert.alert-danger', "The form contains 4 errors."
     # The below assert_select is not necessary.
-    # It is just to demonstrate another way of testing for the right number of errors
+    # It is just to demonstrate another way (possibly better) of testing for the right number of errors
     assert_select 'div#error_explanation ul li', count: 4
   end
 end
