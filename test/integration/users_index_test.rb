@@ -12,9 +12,11 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     get users_path
     assert_template 'users/index'
     assert_select 'div.pagination', count: 2
-    first_page_of_users = User.paginate(page: 1)
-    second_page_of_users = User.paginate(page: 2)
-    first_page_of_users.each do |user|
+    first_page_of_users = User.where(activated: true).paginate(page: 1)
+    second_page_of_users = User.where(activated: true).paginate(page: 2)
+    second_page_of_users.second.toggle!(:activated)
+    assigns(:users).each do |user|
+      assert user.activated?
       assert_select 'a[href=?]', user_path(user), text: user.name
       unless user == @admin
         assert_select 'a[href=?]', user_path(user), text: 'delete'
@@ -26,7 +28,8 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
 
     # Adding extra assert code to check that other pages, besides page 1, work well
     get users_path, params: {page: 2}
-    second_page_of_users.each do |user|
+    assigns(:users).each do |user|
+      assert user.activated?
       assert_select 'a[href=?]', user_path(user), text: user.name
     end
   end
