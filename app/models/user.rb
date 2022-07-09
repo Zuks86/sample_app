@@ -56,17 +56,6 @@ class User < ApplicationRecord
   
   # Sends activation email.
   def send_activation_email
-    
-    # Note: This code is below that prints out the activation link is temporally and only for testing (in production)
-    # You normally would not because the unencrypted token (in the link) should only be known or exposed in the email
-    # of the person whose account is being activated.
-    activation_link = Rails.application.routes.url_helpers
-                            .edit_account_activation_url(activation_token, 
-                                                          email: email,
-                                                          :only_path => false, 
-                                                          :host => "https://zuks-sample-app.herokuapp.com")
-    puts "Account Activation Link: #{activation_link}"
-
     UserMailer.account_activation(self).deliver_now
   end
 
