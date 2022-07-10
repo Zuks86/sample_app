@@ -71,7 +71,7 @@ class User < ApplicationRecord
     # You normally would not because the unencrypted token (in the link) should only be known or exposed in the email
     # of the person whose account needs a password reset.
     reset_link = Rails.application.routes.url_helpers
-                            .edit_password_reset_url(activation_token, 
+                            .edit_password_reset_url(reset_token, 
                                                           email: email,
                                                           :only_path => false, 
                                                           :host => "https://zuks-sample-app.herokuapp.com")
