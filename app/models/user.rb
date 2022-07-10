@@ -67,6 +67,15 @@ class User < ApplicationRecord
 
   # Sends password reset email.
   def send_password_reset_email
+    # Note: The code below that prints out the reset link is temporally and only for testing (in production)
+    # You normally would not because the unencrypted token (in the link) should only be known or exposed in the email
+    # of the person whose account needs a password reset.
+    reset_link = Rails.application.routes.url_helpers
+                            .edit_password_reset_url(activation_token, 
+                                                          email: email,
+                                                          :only_path => false, 
+                                                          :host => "https://zuks-sample-app.herokuapp.com")
+    puts "Password Reset Link: #{reset_link}"
     UserMailer.password_reset(self).deliver_now
   end
 
