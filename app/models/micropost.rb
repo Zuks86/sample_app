@@ -11,9 +11,11 @@ class Micropost < ApplicationRecord
 
   # Returns a resized image for display.
   def display_image
-    # leaving out the imagick code (at least for now) as it has some issues in windows
-    # reverting to just returning then unresized image as it was uploaded
-    #image.variant(resize_to_limit: [500, 500])
-    image
+    # Using the image as in locally (windows) since imagick does not seem to work
+    if Rails.env.development?
+      image
+    else
+      image.variant(resize_to_limit: [500, 500])
+    end
   end
 end
