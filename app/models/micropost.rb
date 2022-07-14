@@ -11,7 +11,7 @@ class Micropost < ApplicationRecord
 
   # Returns a resized image for display.
   def display_image
-    # Using the image as in locally (windows) since imagick does not seem to work
+    # Using the image as is locally (windows) since imagick does not seem to work
     if Rails.env.development?
       image
     else
