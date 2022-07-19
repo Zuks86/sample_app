@@ -1,5 +1,9 @@
 # Ruby on Rails Tutorial sample application
 
+## Live App
+
+https://zuks-sample-app.herokuapp.com
+
 ## Reference implementation
 
 This is the reference implementation of the sample application from
